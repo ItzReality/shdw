@@ -7,7 +7,7 @@ intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 intents.members = True
 bot = commands.Bot(command_prefix='!', intents=intents)
-BOT_TOKEN = "MTE4MDk5Njg3NjE2MjU3NjQwNQ.G6RfX0.AonSpcwXVJmI5cS7_e_3LDNHjXSj59n2ulfkDI"
+BOT_TOKEN = ""
 channel_id = 1161079903094063204
 @client.event
 async def on_ready():
