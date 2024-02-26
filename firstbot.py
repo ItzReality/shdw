@@ -7,6 +7,7 @@ intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 intents.members = True
 bot = commands.Bot(command_prefix='!', intents=intents)
+#bot token key goes here
 BOT_TOKEN = ""
 channel_id = 1161079903094063204
 @client.event
