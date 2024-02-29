@@ -7,29 +7,8 @@ intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 intents.members = True
 bot = commands.Bot(command_prefix='!', intents=intents)
-#bot token key goes here
-BOT_TOKEN = ""
+BOT_TOKEN = "MTE4MDk5Njg3NjE2MjU3NjQwNQ.GtkR7e.HTecpG2_J-bhyn-xlt1InaKnUKIninqTryU03g"
 channel_id = 1161079903094063204
-@client.event
-async def on_ready():
-    # Create a button
-    button = Button(label="Click me!")
-
-    # Create a view
-    view = View()
-    view.add_item(button)
-
-    # Send the view to a user
-    await client.get_user(350052097682833418).send(view)
-    async def on_ready():
-        print('ShadOW Org bot is ready')
-        channel = bot.get_channel(channel_id)
-        await channel.send("Team management bot ready!")
-    @button.callback
-    async def on_button_Click(interaction, button):
-        # Send a message to the user
-        await interaction.respond("You clicked the button!")
-client.run(BOT_TOKEN)
 
 
 
@@ -43,7 +22,21 @@ def has_permission(member):
         if role.name == team_owner_role_name or role.name == staff_role_name:
             return True
     return False
+# on member role change checks to see if both the player and LFT role exist at once if so it removes the LFT role 
+# note  this will require every member that is on a team to have the player role 
+@bot.event
+async def on_member_update(before, after):
+    player_role = discord.utils.get(after.guild.roles, name="player")
+    lft_role = discord.utils.get(after.guild.roles, name="LFT")
 
+    if player_role not in after.roles:
+        if lft_role not in after.roles:
+            await after.add_roles(lft_role)
+            print(f"Gave LFT role back to {after.display_name}")
+
+    if player_role in after.roles and lft_role in after.roles:
+        await after.remove_roles(lft_role)
+        print(f"Removed LFT role from {after.display_name}")
 @bot.event
 async def on_ready():
     print('ShadOW Org bot is ready')
@@ -105,5 +98,6 @@ async def transfer_player(ctx, member: discord.Member, from_team: str, to_team: 
 
 
 # Other commands for promotions, roster updates, etc.
+
 
 bot.run(BOT_TOKEN)  # Use the BOT_TOKEN variable here
