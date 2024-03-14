@@ -1,0 +1,9 @@
+.env
+
+# Ignore VENV
+/venv
+
+# Ignore files from setup script
+/build
+/dist
+/*.egg-info
