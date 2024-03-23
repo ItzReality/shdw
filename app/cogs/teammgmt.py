@@ -1,12 +1,27 @@
 import discord
 from discord.ext import commands
 from components.mgmtUI import MgmtView
+from components.embeds import TeamEmbed
+from models.team import Team
 
 
 class TeamManagement(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
+        self.players = {
+            "roch": {"lineup": "starters", "role": "Tank"},
+            "rishi": {"lineup": "starters", "role": "Dps"},
+            "RealityGhost": {"lineup": "starters", "role": "Dps"},
+            "Gamer": {"lineup": "starters", "role": "Support"},
+            "Briefen": {"lineup": "starters", "role": "Support"},
+            "illushannist": {"lineup": "subs", "role": "Dps"},
+            "geo": {"lineup": "subs", "role": "Dps"},
+            "JStar24": {"lineup": "subs", "role": "Support"},
+            "Eggy": {"lineup": "subs", "role": "Support"},
+            "clover": {"lineup": "tryouts", "role": "Tank"},
+        }
+        self.team = Team("Punks", "3", "rishi", "Aimless", "Gamer", self.players)
 
     def has_permission(self, member):
         # Check if the member has the "Team Owner" or "Staff" role
@@ -101,17 +116,12 @@ class TeamManagement(commands.Cog):
 
     # Other commands for promotions, roster updates, etc.
 
-    team = {
-        "name": "Team Name",
-        "owner": "Owner Name",
-        "Starting Roster": ["Roch", "RealityGhost", "rishi", "Gamer", "Briefen"],
-        "Substitutes": ["illushannist", "JStar24", "Eggy"],
-        "Tryouts": ["geo"],
-    }
-
     @discord.slash_command()
     async def manage_roster(self, ctx, team_name: str):
-        await ctx.respond("This is a button!", view=MgmtView())
+        teamEmbed = TeamEmbed(self.team)
+        await ctx.respond(
+            "This is a button!", embed=teamEmbed.embed, view=MgmtView(teamEmbed)
+        )
 
     # we can add event listeners to our cog
     # this is called when a member joins the server

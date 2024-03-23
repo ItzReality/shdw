@@ -2,7 +2,7 @@
 # pip install -r requirements.txt
 # python -m venv venv
 # source venv/bin/activate
-# .\venv\Scripts\activate.bat
+# .\venv\Scripts\activate
 # pip freeze | Out-File -Encoding UTF8 requirements.txt
 
 from setuptools import setup, find_packages

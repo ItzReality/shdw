@@ -21,7 +21,7 @@ DISCORD_TOKEN=<DISCORD_BOT_TOKEN>
 ```bash
 python -m venv venv
 source venv/bin/activate # only if you have UNIX/MacOS or are using a WSL shell
-.\venv\Scripts\activate.bat # only if you have windows
+.\venv\Scripts\activate # only if you have windows
 python setup.py install
 python app/bot.py
 ```
