@@ -1,5 +1,4 @@
 # shdw
 Team management bot
 
-
--Bot should implent gui, adding all commands via a user interfance gui, or the use of context fields
+Old discord bot written with python, designed for basic functionality for controlling roles of players along with falling within the role requirements to use said command
